@@ -38,7 +38,7 @@ router.post('/login', function (req, res) {
 
         
         if(user.password == req.body.password){
-            res.status(200).send("Success");    
+            res.status(200).send({status:"Success"});    
         }
         else{
             return res.status(500).send("Password did not match");
