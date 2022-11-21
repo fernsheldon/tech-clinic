@@ -34,9 +34,9 @@ router.post('/login', function (req, res) {
    
     var userRiskHeader = null; 
 
-    // if(req.getHeader("Akamai-User-Risk")){
-    //     userRiskHeader = req.getHeader("Akamai-User-Risk");
-    // }
+     if(req.header("Akamai-User-Risk")){
+         userRiskHeader = req.header("Akamai-User-Risk");
+     }
 
     User.findOne({'name':req.body.name}, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
@@ -44,10 +44,10 @@ router.post('/login', function (req, res) {
 
         
         if(user.password == req.body.password){
-            res.status(200).send({status:"Success", userRisk:JSON.stringify(req)});    
+            res.status(200).send({status:"Success", userRisk:userRiskHeader});    
         }
         else{
-            return res.status(500).send({status:"Password did not match", userRisk:JSON.stringify(req)});
+            return res.status(500).send({status:"Password did not match", userRisk:userRiskHeader});
         }
         
     });
