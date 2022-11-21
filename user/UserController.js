@@ -41,7 +41,7 @@ router.post('/login', function (req, res) {
             res.status(200).send({status:"Success"});    
         }
         else{
-            return res.status(500).send("Password did not match");
+            return res.status(500).send({status:"Password did not match"});
         }
         
     });
